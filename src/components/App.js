@@ -5,37 +5,44 @@ import '../assets/stylesheets/base.scss'
 
 class App extends React.Component {
 
-    _check() {
-        let content = null;
-        let username = document.getElementById('username');
-        let password = document.getElementById('password');
-        if(username.value && password.value){
-            content = "content pełne!"
-        } else{
-            content = 'content puste';
+    constructor(props) {
+        super(props);
+        this.state = {
+            value: ''
         }
-        console.log(content);
-        return content;
     }
+
+    getValidationState() {
+        const length = this.state.value.length;
+        if (length > 10) return 'success';
+        else if (length > 5) return 'warning';
+        else if (length > 0) return 'error';
+    }
+
+    handleChange(e) {
+        this.setState({ value: e.target.value });
+    }
+
+
 
     render() {
         return <section className="section__log">
             <div className="div__log">
                 <form>
-                    <FormGroup>
+                    <FormGroup controlId="formBasicText" validationState={this.getValidationState()}>
                         <ControlLabel className="pdn10">Login</ControlLabel>
-                        <span>{this._check}</span>
                         <InputGroup className="pdn10">
                             <InputGroup.Addon>@</InputGroup.Addon>
-                            <FormControl type="text" placeholder="Username" id="username"/>
+                            <FormControl type="text" placeholder="Username" value={this.state.value} onChange={this.handleChange}/>
+                            <FormControl.Feedback />
                         </InputGroup>
                         <InputGroup className="pdn10">
                             <InputGroup.Addon><Glyphicon glyph="star"/></InputGroup.Addon>
-                            <FormControl type="password" placeholder="Password" id="password"/>
+                            <FormControl type="password" placeholder="Password"/>
                         </InputGroup>
                         <div className="div__ctrl">
                             <div className="pdn10-left"><Checkbox readOnly>Keep me logged in</Checkbox></div>
-                            <div className="pdn10-right"><Button onClick={()=> this._check() } bsStyle="info" id="btn__login" type="button">Submit</Button></div>
+                            <div className="pdn10-right"><Button bsStyle="info" id="btn__login" type="button">Submit</Button></div>
                         </div>
                     </FormGroup>
                 </form>
