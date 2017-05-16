@@ -28,6 +28,7 @@ export const AuthButton = withRouter(({history}) => (
     fakeAuth.isAuthenticated ? (
         <p className="auth-paragraph">
             You are logged in as <span className="info">{initialState.username}</span>
+            <Link to="/settings">Account Settings</Link>
             <Button bsStyle="danger" bsSize="xsmall" className="auth-btn" onClick={() => {
                 fakeAuth.signout(() => history.push('/public'))
             }}>Sign out
@@ -55,7 +56,7 @@ export const PrivateRoute = ({component: Component, ...rest}) => (
 );
 
 export const Public = () => <section id="public"><h1>Aplikacja w budowie</h1></section>;
-export const Protected = () => <section id="protected"><h1>Zawartość chroniona</h1></section>;
+
 
 const initialState = {
     username: 'tdkontakt@gmail.com',
@@ -112,7 +113,7 @@ export class Login extends React.Component {
 
         return (
             <section id="section__log">
-                <div className="div__log">
+                <div className="div__panel">
                     <Form>
                         <FormGroup validationState={this.getValidationState()}>
                             <ControlLabel className="pdn10">Login</ControlLabel>
@@ -129,14 +130,16 @@ export class Login extends React.Component {
                             <FormControl type="password" placeholder="Password" id='password' value={this.state.value}
                                          onChange={ e => this.setState({password: e.target.value})}/>
                         </InputGroup>
-                        <div className="div__ctrl">
+                        <div className="div__ctrl__login">
                             <div className="pdn10-left"><Checkbox readOnly>Keep me logged in</Checkbox></div>
                             <div className="pdn10-right"><Button bsStyle="info" id="btn__login" type="button"
                                                                  onClick={this.login}>Submit</Button></div>
+
                         </div>
                     </Form>
+                    <div className="registration"><Link to="/registration">Sign me up</Link></div>
                 </div>
-                Please use login: <b>tdkontakt@gmail.com</b> and password: <b>tom1234</b> temporarily
+                <div id="temp"> Please use login: <b>tdkontakt@gmail.com</b> and password: <b>tom1234</b> temporarily</div>
             </section>
         )
     }

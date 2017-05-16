@@ -10,19 +10,30 @@
 .clr-white {
   color: white;
 }
-.div__ctrl {
+.div__ctrl__login {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
-#section__log {
+.div__ctrl__register {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+#btn__register{
+  margin-bottom: 10px;
+}
+#btn__edit {
+  margin-bottom: 10px;
+}
+#section__log, #section__register, #section__edit {
   height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center
 }
-.div__log {
+.div__panel {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -64,11 +75,18 @@
 .info {
   color: #bbbbbb;
   font-style: italic;
+  margin-right: 10px;
 }
-#public, #protected {
+#public, #protected, #admin {
   height: 100vh;
   display: flex;
   justify-content: center;
+  align-items: center;
+}
+#temp {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
   align-items: center;
 }
 
