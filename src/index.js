@@ -1,9 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Nav, Navbar, NavItem} from 'react-bootstrap'
+import { Nav, Navbar} from 'react-bootstrap'
+
 import {AuthButton, PrivateRoute, Public, Login} from './components/App'
 import Protected from './components/counter'
-import {BrowserRouter as NewRouter, Route, Link} from 'react-router-dom'
+import {BrowserRouter as NewRouter, Route, Link, NavLink} from 'react-router-dom'
 import './assets/stylesheets/base.scss';
 import Provider from "react-redux/src/components/Provider";
 import store from './store'
@@ -22,12 +23,9 @@ const AuthExample = () => (
                     <Navbar.Toggle />
                 </Navbar.Header>
                 <Navbar.Collapse>
-                    <Nav>
-                        <NavItem><Link to="/public" className="clr-white">Aplication</Link></NavItem>
-                        <NavItem><Link to="/admin" className="clr-white">Admin Panel</Link></NavItem>
-                    </Nav>
-                    <Nav pullRight><AuthButton />
-                    </Nav>
+                        <NavLink to="/public" className="navlink">Aplication</NavLink>
+                        <NavLink to="/admin" className="navlink">Admin Panel</NavLink>
+                    <Nav pullRight><AuthButton /></Nav>
                 </Navbar.Collapse>
             </Navbar>
             <Route path="/public" component={Public}/>
