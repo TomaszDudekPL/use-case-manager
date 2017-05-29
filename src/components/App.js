@@ -65,15 +65,14 @@ const initialState = {
 
 export class Login extends React.Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {
+
+        state = {
             username: '',
             password: '',
             redirectToReferrer: false
 
-        }
-    }
+        };
+
 
     login = () => {
         const username = document.getElementById('username').value;

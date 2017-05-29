@@ -24,7 +24,7 @@ export default class Admin extends React.Component {
         };
     }
 
-    _sort(e){
+    _sort= (e)=>{
         let column = e.target.cellIndex;
         let data = this.state.data.slice();
         let descending = this.state.sortby === column && !this.state.descending;
@@ -36,7 +36,7 @@ export default class Admin extends React.Component {
             sortby: column,
             descending: descending
         })
-    }
+    };
 
 
 

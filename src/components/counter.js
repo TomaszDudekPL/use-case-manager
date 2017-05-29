@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-
+import * as counterActions from '../State/counterActions'
 
 class Protected extends React.Component {
 
@@ -21,14 +21,14 @@ class Protected extends React.Component {
 
 }
 
-export const mapStateToProps = (state) => {
+const mapStateToProps = (state) => {
     console.log(state);
   return {counter: state.counterReducer.counter}
 };
-export const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch) => {
   return{
-      onIncrement: () => dispatch({ type: 'INCREMENT'}),
-      onDecrement: () => dispatch({ type: 'DECREMENT'})
+      onIncrement: () => dispatch(counterActions.increment()),
+      onDecrement: () => dispatch(counterActions.decrement())
   }
 };
 
