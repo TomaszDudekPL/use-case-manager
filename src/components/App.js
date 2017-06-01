@@ -1,4 +1,6 @@
 import React from 'react'
+import {connect} from 'react-redux'
+import {signin} from '../state/user/userActions'
 import {
     FormGroup,
     FormControl,
@@ -63,18 +65,21 @@ const initialState = {
     password: 'tom1234'
 };
 
-export class Login extends React.Component {
+
+export default class Login extends React.Component {
 
 
-        state = {
-            username: '',
-            password: '',
-            redirectToReferrer: false
+    state = {
+        username: '',
+        password: '',
+        redirectToReferrer: false
 
-        };
+    };
 
 
     login = () => {
+
+        this.props.signinHelper(this.state.username, this.state.password);
         const username = document.getElementById('username').value;
         const password = document.getElementById('password').value;
         let warning = document.getElementById('warning');
@@ -138,9 +143,16 @@ export class Login extends React.Component {
                     </Form>
                     <div className="registration"><Link to="/registration">Sign me up</Link></div>
                 </div>
-                <div id="temp"> Please use login: <b>tdkontakt@gmail.com</b> and password: <b>tom1234</b> temporarily</div>
+                <div id="temp"> Please use login: <b>tdkontakt@gmail.com</b> and password: <b>tom1234</b> temporarily
+                </div>
             </section>
         )
     }
 }
 
+
+const mapDispatchToProps = (dispatch) => ({
+    signinHelper: (username, password) => dispatch(signin(username, password))
+});
+
+Login = connect(null, mapDispatchToProps)(Login);

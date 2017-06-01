@@ -6,7 +6,7 @@ import {AuthButton, PrivateRoute, Public, Login} from './components/App'
 import Protected from './components/counter'
 import {BrowserRouter as NewRouter, Route, Link, NavLink} from 'react-router-dom'
 import './assets/stylesheets/base.scss';
-import Provider from "react-redux/src/components/Provider";
+import {Provider} from "react-redux";
 import store from './store'
 import Admin from './components/admin'
 import Registration from './components/Registration'

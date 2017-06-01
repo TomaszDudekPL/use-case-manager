@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import * as counterActions from '../State/counterActions'
+import * as counterActions from '../state/counterActions'
 
 class Protected extends React.Component {
 
