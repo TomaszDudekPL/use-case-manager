@@ -1,47 +1,92 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Nav, Navbar} from 'react-bootstrap'
+import { Nav, Navbar } from 'react-bootstrap';
+import { BrowserRouter as NewRouter, Route, NavLink } from 'react-router-dom';
+import { Provider } from 'react-redux';
 
-import {AuthButton, PrivateRoute, Public, Login} from './components/App'
-import Protected from './components/counter'
-import {BrowserRouter as NewRouter, Route, Link, NavLink} from 'react-router-dom'
+import store from './store';
+
 import './assets/stylesheets/base.scss';
-import {Provider} from "react-redux";
-import store from './store'
-import Admin from './components/admin'
-import Registration from './components/Registration'
-import EditUser from './components/EditUser'
+
+import AuthButton from './components/AuthButton';
+import PrivateRoute from './components/PrivateRoute';
+import Public from './components/Public';
+import Login from './components/Login';
+import Protected from './components/Counter';
+import Admin from './components/Admin';
+import Registration from './components/Registration';
+import EditUser from './components/EditUser';
 
 const AuthExample = () => (
-    <NewRouter>
-        <div>
-            <Navbar inverse collapseOnSelect fixedTop>
-                <Navbar.Header>
-                    <Navbar.Brand>
-                        <a href="#">Use Case Manager</a>
-                    </Navbar.Brand>
-                    <Navbar.Toggle />
-                </Navbar.Header>
-                <Navbar.Collapse>
-                        <NavLink to="/public" className="navlink">Aplication</NavLink>
-                        <NavLink to="/admin" className="navlink">Admin Panel</NavLink>
-                    <Nav pullRight><AuthButton /></Nav>
-                </Navbar.Collapse>
-            </Navbar>
-            <Route path="/public" component={Public}/>
-            <Route path="/login" component={Login}/>
-            <Route path="/admin" component={Admin}/>
-            <Route path="/settings" component={EditUser}/>
-            <Route path="/registration" component={Registration}/>
-            <PrivateRoute path="/protected" component={Protected}/>
-        </div>
-    </NewRouter>
+  <NewRouter>
+    <div>
+      <Navbar
+        collapseOnSelect
+        fixedTop
+        inverse
+      >
+        <Navbar.Header>
+          <Navbar.Brand>
+            <a href="#">Use Case Manager</a>
+          </Navbar.Brand>
+          <Navbar.Toggle />
+        </Navbar.Header>
+        <Navbar.Collapse>
+          <NavLink
+            className="navlink"
+            to="/public"
+          >
+            Aplication
+          </NavLink>
+          <NavLink
+            className="navlink"
+            to="/admin"
+          >
+            Admin Panel
+          </NavLink>
+          <Nav pullRight>
+            <AuthButton />
+          </Nav>
+        </Navbar.Collapse>
+      </Navbar>
+
+      <Route
+        component={Public}
+        path="/public"
+      />
+
+      <Route
+        component={Login}
+        path="/login"
+      />
+
+      <Route
+        component={Admin}
+        path="/admin"
+      />
+
+      <Route
+        component={EditUser}
+        path="/settings"
+      />
+
+      <Route
+        component={Registration}
+        path="/registration"
+      />
+
+      <PrivateRoute
+        component={Protected}
+        path="/protected"
+      />
+    </div>
+  </NewRouter>
 );
 
 
 ReactDOM.render(
-    <Provider store={store}>
+  <Provider store={store}>
     <AuthExample />
-    </Provider>,
-    document.getElementById('root')
+  </Provider>,
+  document.getElementById('root')
 );
