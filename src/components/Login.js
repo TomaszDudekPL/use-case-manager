@@ -17,7 +17,7 @@ import fakeAuth from './_utils/fakeAuth';
 
 
 
-export default class Login extends React.Component {
+class Login extends React.Component {
 
 
   state = {
@@ -118,6 +118,7 @@ export default class Login extends React.Component {
 
 const mapDispatchToProps = (dispatch) => ({
   signinHelper: (username, password) => dispatch(signin(username, password))
+
 });
 
-Login = connect(null, mapDispatchToProps)(Login);
+export default connect(null, mapDispatchToProps)(Login);

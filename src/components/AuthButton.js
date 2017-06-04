@@ -1,12 +1,18 @@
-
 import React from 'react';
 import { Link, withRouter } from 'react-router-dom';
+import  { connect } from 'react-redux';
 import { Button } from 'react-bootstrap';
+import { signout } from '../state/user/userActions';
 
 import fakeAuth from './_utils/fakeAuth';
 import initialState from './_utils/initialState';
 
-const AuthButton = withRouter(({ history }) => (
+
+const AuthButton = withRouter(({ history } ) =>{
+
+  const { signoutHelper } = this.props;
+
+  return (
   fakeAuth.isAuthenticated ? (
     <p className="auth-paragraph">
       You are logged in as <span className="info">{initialState.username}</span>
@@ -17,6 +23,7 @@ const AuthButton = withRouter(({ history }) => (
         className="auth-btn"
         onClick={() => {
           fakeAuth.signout(() => history.push('/public'));
+          signoutHelper();
         }}
       >Sign out
       </Button>
@@ -38,6 +45,14 @@ const AuthButton = withRouter(({ history }) => (
       </div>
     </div>
   )
-));
+  );
+} );
 
-export default AuthButton;
+const mapDispatchToProps = (dispatch) => ({
+  signoutHelper: () => dispatch(signout())
+
+});
+
+export default connect(null, mapDispatchToProps)(AuthButton);
+
+
