@@ -1,17 +1,14 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
-import { Route, Redirect } from 'react-router-dom';
-
-import fakeAuth from './_utils/fakeAuth';
-
+import { Route, Redirect, withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 
-
-export const PrivateRoute = ({ component: Component, ...rest }) => (
+const PrivateRoute = ({ component: Component,isAuthenticated, ...rest }) => (
   <Route
     {...rest}
     render={props => (
-      fakeAuth.isAuthenticated ? (
+      isAuthenticated ? (
         <Component {...props} />
       ) : (
         <Redirect
@@ -25,4 +22,13 @@ export const PrivateRoute = ({ component: Component, ...rest }) => (
   />
 );
 
-export default PrivateRoute;
+const mapStateToProps = (state) => {
+
+  return { isAuthenticated: state.user.loaded };
+
+};
+
+
+export default withRouter(connect(mapStateToProps)(PrivateRoute));
+
+

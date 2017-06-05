@@ -1,9 +1,11 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import { connect } from 'react-redux';
 import * as counterActions from '../state/counterActions';
 
-const Protected = () => {
-  const { counter, onDecrement, onIncrement } = this.props;
+const Protected = (props) => {
+
+  const { counter, onDecrement, onIncrement } = props;
 
   return (
     <section id="protected">
@@ -17,7 +19,7 @@ const Protected = () => {
 };
 
 const mapStateToProps = (state) => {
-  console.log(state);
+
   return { counter: state.counterReducer.counter };
 };
 

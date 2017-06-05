@@ -12,8 +12,8 @@ import {
   Button,
   Form
 } from 'react-bootstrap';
-import { Link, Redirect } from 'react-router-dom';
-import fakeAuth from './_utils/fakeAuth';
+import { Link, Redirect, withRouter } from 'react-router-dom';
+
 
 
 
@@ -29,7 +29,6 @@ class Login extends React.Component {
 
 
   handleLogin = () => {
-
     this.props.signinHelper(this.state.username, this.state.password);
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
@@ -39,9 +38,8 @@ class Login extends React.Component {
     }
     else {
       warning.innerHTML = '';
-      fakeAuth.authenticate(() => {
-        this.setState({ redirectToReferrer: true });
-      });
+      this.setState({ redirectToReferrer: true });
+
     }
 
   };
@@ -59,8 +57,8 @@ class Login extends React.Component {
   render() {
     const { from } = this.props.location.state || { from: { pathname: '/' } };
     const { redirectToReferrer } = this.state;
-
-    if (redirectToReferrer) {
+    const { isAuthenticated } = this.props;
+    if (redirectToReferrer && isAuthenticated) {
       return (
         <Redirect to={from} />
       );
@@ -115,10 +113,14 @@ class Login extends React.Component {
   }
 }
 
+const mapStateToProps = (state) => {
+  console.log(state);
+  return { isAuthenticated: state.user.loaded };
 
+};
 const mapDispatchToProps = (dispatch) => ({
   signinHelper: (username, password) => dispatch(signin(username, password))
 
 });
 
-export default connect(null, mapDispatchToProps)(Login);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Login));
