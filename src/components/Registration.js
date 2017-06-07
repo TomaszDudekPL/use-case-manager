@@ -18,8 +18,8 @@ class Registration extends React.Component {
   };
 
   handleSignUp() {
-    const { signupHelper } = this.props;
-    signupHelper(this.state.firstName, this.state.lastName,this.state.email, this.state.password, this.state.confirmPassword);
+
+    this.props.signupHelper(this.state.firstName, this.state.lastName,this.state.email, this.state.password, this.state.confirmPassword);
   }
 
 
