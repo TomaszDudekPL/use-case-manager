@@ -4,22 +4,18 @@ import { Link, withRouter } from 'react-router-dom';
 import  { connect } from 'react-redux';
 import { Button } from 'react-bootstrap';
 import { signout } from '../state/user/userActions';
-import initialState from './_utils/initialState';
+
 
 
 class AuthButton extends React.Component{
 
-  componentDidMount() {
-    const { username } = this.props;
-    return username;
-  }
 
   render() {
-    const { history, signoutHelper, isAuthenticated }= this.props;
+    const { history, signoutHelper, isAuthenticated, data }= this.props;
     return (
      isAuthenticated ? (
        <p className="auth-paragraph">
-         You are logged in as <span className="info">{initialState.username}</span>
+         You are logged in as <span className="info">{data.fullName || data.username}</span>
          <Link to="/settings">Account Settings</Link>
          <Button
            bsSize="xsmall"
@@ -53,15 +49,14 @@ class AuthButton extends React.Component{
 }
 
 const mapStateToProps = (state) => {
-  console.log(state);
   return {
-    isAuthenticated: state.user.loaded };
-    // username: state.user.data.username };
-
+    isAuthenticated: state.user.loaded,
+    data: state.user.data
+  };
 };
+
 const mapDispatchToProps = (dispatch) => ({
   signoutHelper: () => dispatch(signout())
-
 });
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(AuthButton));

@@ -23,17 +23,17 @@ class Login extends React.Component {
   state = {
     username: '',
     password: '',
-    redirectToReferrer: false
+    redirectToReferrer: false,
+
 
   };
 
 
-  handleLogin = () => {
-    this.props.signinHelper(this.state.username, this.state.password);
-    const username = document.getElementById('username').value;
-    const password = document.getElementById('password').value;
+  warning() {
+    const { error } = this.props;
+    const { isAuthenticated } = this.props;
     let warning = document.getElementById('warning');
-    if (!(username === this.state.username && password === this.state.password)) {
+    if (error && !isAuthenticated ) {
       warning.innerHTML = 'Username or Password incorrect';
     }
     else {
@@ -41,6 +41,16 @@ class Login extends React.Component {
       this.setState({ redirectToReferrer: true });
 
     }
+
+  }
+
+
+
+  handleLogin = () => {
+    this.props.signinHelper(this.state.username, this.state.password);
+    // const username = document.getElementById('username').value;
+    // const password = document.getElementById('password').value;
+    this.warning();
 
   };
 
@@ -114,8 +124,12 @@ class Login extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  console.log(state);
-  return { isAuthenticated: state.user.loaded };
+  console.log(state.user.error);
+  return {
+    isAuthenticated: state.user.loaded,
+    data: state.user.data,
+    error: state.user.error
+  };
 
 };
 const mapDispatchToProps = (dispatch) => ({
