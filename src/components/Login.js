@@ -16,7 +16,6 @@ import { Link, Redirect, withRouter } from 'react-router-dom';
 
 
 
-
 class Login extends React.Component {
 
 
@@ -29,28 +28,22 @@ class Login extends React.Component {
   };
 
 
-  warning() {
+  warning = () => {
     const { error } = this.props;
-    const { isAuthenticated } = this.props;
     let warning = document.getElementById('warning');
-    if (error && !isAuthenticated ) {
+    if ( error ) {
       warning.innerHTML = 'Username or Password incorrect';
     }
     else {
       warning.innerHTML = '';
       this.setState({ redirectToReferrer: true });
-
     }
-
-  }
-
+  };
 
 
   handleLogin = () => {
     this.props.signinHelper(this.state.username, this.state.password);
-    // const username = document.getElementById('username').value;
-    // const password = document.getElementById('password').value;
-    this.warning();
+    this.warning()
 
   };
 
@@ -65,6 +58,7 @@ class Login extends React.Component {
   }
 
   render() {
+    if(this.props.error) this.warning();
     const { from } = this.props.location.state || { from: { pathname: '/' } };
     const { redirectToReferrer } = this.state;
     const { isAuthenticated } = this.props;
@@ -124,7 +118,7 @@ class Login extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  console.log(state.user.error);
+
   return {
     isAuthenticated: state.user.loaded,
     data: state.user.data,
@@ -133,7 +127,7 @@ const mapStateToProps = (state) => {
 
 };
 const mapDispatchToProps = (dispatch) => ({
-  signinHelper: (username, password) => dispatch(signin(username, password))
+  signinHelper: (username, password) => dispatch(signin(username, password)),
 
 });
 

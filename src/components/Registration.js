@@ -2,8 +2,9 @@
 import React from 'react';
 import { Form, FormGroup, ControlLabel, InputGroup, FormControl, Glyphicon, Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Redirect } from 'react-router-dom';
 import { signup } from '../state/user/userActions';
+
 
 
 class Registration extends React.Component {
@@ -17,14 +18,19 @@ class Registration extends React.Component {
 
   };
 
-  handleSignUp() {
-    const { signupHelper } = this.props;
-    signupHelper(this.state.firstName, this.state.lastName,this.state.email, this.state.password, this.state.confirmPassword);
-  }
+  handleSignUp =() => {
+    this.props.signupHelper(this.state.firstName, this.state.lastName,this.state.email, this.state.password, this.state.confirmPassword);
+  };
 
 
   render() {
-    console.log(this.state);
+    const { from } = this.props.location.state || { from: { pathname: '/' } };
+    const { isAuthenticated, data } = this.props;
+    if (isAuthenticated && data) {
+      return (
+        <Redirect to={from} />
+      );
+    }
     return ( <section id="section__register">
       <div className="div__panel">
         <Form>
@@ -33,7 +39,7 @@ class Registration extends React.Component {
             <div
               className="warning pdn10-left"
               id="warning"
-            >x
+            >
             </div>
             <InputGroup className="pdn10">
               <InputGroup.Addon><Glyphicon glyph="user" /></InputGroup.Addon>
@@ -106,7 +112,11 @@ class Registration extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  return state;
+
+  return {
+    isAuthenticated: state.user.loaded,
+    data: state.user.data
+  }
 };
 
 const mapDispatchToProps = (dispatch) => ({
