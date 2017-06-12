@@ -2,6 +2,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { signin } from '../state/user/userActions';
+import { getUsers } from '../state/users/usersActions';
 import {
   FormGroup,
   FormControl,
@@ -16,7 +17,6 @@ import { Link, Redirect, withRouter } from 'react-router-dom';
 
 
 
-
 class Login extends React.Component {
 
 
@@ -28,18 +28,17 @@ class Login extends React.Component {
 
   };
 
-
   warning() {
     const { error } = this.props;
     const { isAuthenticated } = this.props;
+
     let warning = document.getElementById('warning');
+
     if (error && !isAuthenticated ) {
       warning.innerHTML = 'Username or Password incorrect';
     }
     else {
       warning.innerHTML = '';
-      this.setState({ redirectToReferrer: true });
-
     }
 
   }
@@ -48,10 +47,8 @@ class Login extends React.Component {
 
   handleLogin = () => {
     this.props.signinHelper(this.state.username, this.state.password);
-    // const username = document.getElementById('username').value;
-    // const password = document.getElementById('password').value;
     this.warning();
-
+    this.props.getUsers()
   };
 
   getValidationState() {
@@ -65,14 +62,20 @@ class Login extends React.Component {
   }
 
   render() {
+
     const { from } = this.props.location.state || { from: { pathname: '/' } };
-    const { redirectToReferrer } = this.state;
     const { isAuthenticated } = this.props;
-    if (redirectToReferrer && isAuthenticated) {
+
+    if(this.props.error) this.warning();
+
+    if (this.props.data && isAuthenticated) {
       return (
         <Redirect to={from} />
       );
     }
+    const{ getUsers } =this.props;
+    // console.log(getUsers);
+
 
     return (
       <section id="section__log">
@@ -124,7 +127,7 @@ class Login extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  console.log(state.user.error);
+    // console.log(state);
   return {
     isAuthenticated: state.user.loaded,
     data: state.user.data,
@@ -133,8 +136,8 @@ const mapStateToProps = (state) => {
 
 };
 const mapDispatchToProps = (dispatch) => ({
-  signinHelper: (username, password) => dispatch(signin(username, password))
-
+  signinHelper: (username, password) => dispatch(signin(username, password)),
+  getUsers: () => dispatch(getUsers())
 });
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Login));

@@ -66,7 +66,7 @@ export const socialSigninWithToken = (provider, token) => {
   };
 }
 
-export const signup = (email, password, confirmPassword, firstName, lastName, parameters) => {
+export const signup = (firstName, lastName, email, password, confirmPassword, parameters) => {
   return dispatch => {
     if (!backand.defaults.runSigninAfterSignup) {
       throw new Error(`runSigninAfterSignup is false but you wish to make changes to the store.
