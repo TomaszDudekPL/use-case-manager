@@ -19,7 +19,7 @@ class Registration extends React.Component {
   };
 
   handleSignUp =() => {
-    this.props.signupHelper(this.state.firstName, this.state.lastName,this.state.email, this.state.password, this.state.confirmPassword);
+    this.props.signupHelper(this.state.firstName, this.state.lastName,this.state.email, this.state.password, this.state.confirmPassword, {userId: 666});
   };
 
 
@@ -112,7 +112,7 @@ class Registration extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-
+console.log(state);
   return {
     isAuthenticated: state.user.loaded,
     data: state.user.data
@@ -120,7 +120,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  signupHelper: (firstName, lastName, email, password, confirmPassword) => dispatch(signup(firstName, lastName, email, password, confirmPassword))
+  signupHelper: (firstName, lastName, email, password, confirmPassword, userId) => dispatch(signup(firstName, lastName, email, password, confirmPassword, userId))
 
 });
 
