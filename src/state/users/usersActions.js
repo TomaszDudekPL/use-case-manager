@@ -62,12 +62,12 @@ export const updateUsers = (id, data, options = {}, parameters) => {
       .then(response => {
         // SUCCESS CALLBACK: Write your code here!
         // Use the following type, and payload structure in case of using dispatch():
-        // dispatch({
-        //   type: UPDATE_USERS_RESOLVE,
-        //   payload: {
-        //     data: DATA_TO_REDUCER
-        //   }
-        // });
+        dispatch({
+          type: UPDATE_USERS_RESOLVE,
+          payload: {
+            data: DATA_TO_REDUCER
+          }
+        });
       })
       .catch(error => {
         dispatch({

@@ -7,6 +7,15 @@
 .pdn10-right {
   padding-right: 10px;
 }
+.margin10-right{
+  margin-right: 10px;
+}
+.margin10-left{
+  margin-left: 10px;
+}
+.flex{
+  display: flex;
+}
 .navlink {
   display: inline-block;
   color: white;
@@ -21,7 +30,7 @@
 .div__ctrl__register {
   display: flex;
   flex-direction: row;
-  justify-content: flex-end;
+  justify-content: space-between;
 }
 #btn__register{
   margin-bottom: 10px;
