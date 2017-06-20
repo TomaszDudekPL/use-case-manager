@@ -8,14 +8,14 @@ import store from './store';
 
 import './assets/stylesheets/base.scss';
 
-import AuthButton from './components/AuthButton';
-import PrivateRoute from './components/PrivateRoute';
-import Public from './components/Public';
-import Login from './components/Login';
-import Protected from './components/Counter';
-import Admin from './components/Admin';
-import Registration from './components/Registration';
-import EditUser from './components/EditUser';
+import AuthButton from './containers/AuthButton';
+import PrivateRoute from './containers/PrivateRoute';
+import Public from './containers/Public';
+import Login from './containers/Login';
+import Protected from './containers/Protected';
+import Admin from './containers/Admin';
+import Registration from './containers/Registration';
+import EditUser from './containers/EditUser';
 
 const AuthExample = () => (
   <NewRouter>

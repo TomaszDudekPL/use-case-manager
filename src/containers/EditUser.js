@@ -3,7 +3,7 @@ import {Form, FormGroup, ControlLabel, InputGroup, FormControl, Glyphicon, Butto
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { removeUsers, updateUsers } from '../state/users/usersActions';
-// import { getUserDetails } from '../state/user/userActions';
+import { signout } from '../state/user/userActions';
 
 
 
@@ -19,9 +19,11 @@ class EditUser extends React.Component {
   };
 
   handleRemoveUsers = () => {
-    this.props.removeUsers(this.state.userId)
+    this.props.removeUsers(this.state.userId);
+    // this.props.signout();
   };
   handleEditData = () => {
+
     this.props.updateUsers(this.state.userId, {firstName: this.state.firstName, lastName: this.state.lastName, username: this.state.email});
 
   };
@@ -117,9 +119,8 @@ console.log(state);
 const mapDispatchToProps = (dispatch) => ({
 
   removeUsers: (id) => dispatch(removeUsers(id)),
-  updateUsers: (id, data, options = {}, parameters) => dispatch(updateUsers(id, data, options = {}, parameters))
-
+  updateUsers: (id, data, options = {}, parameters) => dispatch(updateUsers(id, data, options = {}, parameters)),
+  signout: () => dispatch(signout())
 });
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(EditUser));
-
 

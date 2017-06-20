@@ -48,7 +48,7 @@ class Login extends React.Component {
   handleLogin = () => {
     this.props.signinHelper(this.state.username, this.state.password);
     this.warning();
-    this.props.getUsers()
+
   };
 
   getValidationState() {
@@ -73,8 +73,7 @@ class Login extends React.Component {
         <Redirect to={from} />
       );
     }
-    const{ getUsers } =this.props;
-    // console.log(getUsers);
+
 
 
     return (
@@ -127,7 +126,7 @@ class Login extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-    // console.log(state);
+    console.log(state.user.loaded);
   return {
     isAuthenticated: state.user.loaded,
     data: state.user.data,
@@ -137,7 +136,7 @@ const mapStateToProps = (state) => {
 };
 const mapDispatchToProps = (dispatch) => ({
   signinHelper: (username, password) => dispatch(signin(username, password)),
-  getUsers: () => dispatch(getUsers())
+
 });
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Login));
