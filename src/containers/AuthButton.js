@@ -17,6 +17,7 @@ class AuthButton extends React.Component{
        <p className="auth-paragraph">
          You are logged in as <span className="info">{data.fullName || data.username}</span>
          <Link to="/settings">Account Settings</Link>
+         <Link to="/protected" className="red margin10-left">Use Case Manager</Link>
          <Button
            bsSize="xsmall"
            bsStyle="danger"

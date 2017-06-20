@@ -109,7 +109,7 @@ class Login extends React.Component {
               <div className="pdn10-left"><Checkbox readOnly>Keep me logged in</Checkbox></div>
               <div className="pdn10-right">
                 <Button
-                  bsStyle="info"
+                  bsStyle="primary"
                   id="btn__login"
                   onClick={this.handleLogin}
                   type="button"
