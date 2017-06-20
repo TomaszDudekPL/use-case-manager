@@ -2,7 +2,7 @@ import React from 'react'
 import {Panel, ListGroup, ListGroupItem} from 'react-bootstrap'
 
 const title1 = (
-  <h3>Title</h3>
+  <h3>Use Case List-Title</h3>
 );
 
 const UseCaseList = () => {

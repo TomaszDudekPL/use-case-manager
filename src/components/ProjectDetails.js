@@ -15,13 +15,13 @@ const ProjectsDetails = () => {
 
   return(
     <div id="ProjectsDetails">
-      <Panel header={title1} bsStyle="primary">
-        <Panel header={title2} bsStyle="info" collapsible >
+      <Panel header={title1} bsStyle="primary" defaultExpanded>
+        <Panel header={title2} bsStyle="info" collapsible defaultExpanded >
         <ListGroup fill>
         <ListGroupItem href="#link1">Owner: Tomasz Dudek</ListGroupItem>
         </ListGroup>
         </Panel>
-        <Panel header={title3} bsStyle="info" collapsible >
+        <Panel header={title3} bsStyle="info" collapsible defaultExpanded>
         <ListGroup fill>
           <ListGroupItem href="#link1" className="flex flx-space-between">User1
             <Button bsStyle="danger" bsSize="xsmall" className="hide" >Remove User</Button>

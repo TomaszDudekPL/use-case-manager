@@ -22,7 +22,12 @@
 .hide {
   display: none;
 }
-
+.pos-relative{
+  position: relative;
+}
+.top-200{
+  top: 150px
+}
 
 
 
@@ -111,18 +116,6 @@
   flex-direction: column;
   align-items: center;
 }
-#ProjectsDetails{
-  width:  400px;
-}
-#MyProjects{
-  width: 200px;
-}
-#UseCaseList{
-  width: 400px;
-}
 #protected{
-  display: flex;
   height: 100vh;
-
-  align-items: center;
 }

@@ -3,26 +3,25 @@ import React from 'react';
 import MyProjects from '../components/MyProjects'
 import ProjectDetails from '../components/ProjectDetails'
 import UseCaseList from '../components/UseCaseList'
-import {Grid} from 'react-bootstrap'
+import RegisteredUsers from '../components/RegisteredUsers'
+import {Grid, Row, Col} from 'react-bootstrap'
 
 
 const Protected = () => {
 
 
-
   return (
     <Grid>
-    <section id="protected">
-      <div>
-        <MyProjects />
-      </div>
-      <div>
-        <ProjectDetails />
-      </div>
-      <div>
-        <UseCaseList />
-      </div>
-    </section>
+      <Row className="pos-relative top-200">
+        <Col xs={12} md={4}>
+          <MyProjects />
+          <RegisteredUsers />
+        </Col>
+        <Col xs={12} md={8}>
+          <ProjectDetails />
+          <UseCaseList />
+        </Col>
+      </Row>
     </Grid>
   );
 };
