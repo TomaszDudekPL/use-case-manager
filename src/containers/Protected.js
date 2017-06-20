@@ -4,7 +4,7 @@ import MyProjects from '../components/MyProjects'
 import ProjectDetails from '../components/ProjectDetails'
 import UseCaseList from '../components/UseCaseList'
 import RegisteredUsers from '../components/RegisteredUsers'
-import {Grid, Row, Col} from 'react-bootstrap'
+import {Grid, Row, Col, Button} from 'react-bootstrap'
 
 
 const Protected = () => {
@@ -12,8 +12,9 @@ const Protected = () => {
 
   return (
     <Grid>
-      <Row className="pos-relative top-200">
+      <Row className="pos-relative top-150">
         <Col xs={12} md={4}>
+          <Button bsStyle="success" className="margin10-bottom" block>+ Add New Project</Button>
           <MyProjects />
           <RegisteredUsers />
         </Col>
