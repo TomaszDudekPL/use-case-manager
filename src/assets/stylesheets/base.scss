@@ -22,6 +22,9 @@
 .flx-space-between{
   justify-content: space-between;
 }
+.flx-end{
+  justify-content: flex-end;
+}
 .hide {
   display: none;
 }
@@ -34,6 +37,16 @@
 .red{
   color: #f0402c
 }
+.block{
+  height: 42px;
+}
+.block .block-btn{
+  display: none;
+}
+.block:hover .block-btn {
+  display: block;
+}
+
 
 
 

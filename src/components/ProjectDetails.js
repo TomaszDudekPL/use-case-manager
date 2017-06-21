@@ -13,29 +13,46 @@ const title3 = (
 
 const ProjectsDetails = () => {
 
+
   return(
     <div id="ProjectsDetails">
       <Panel header={title1} bsStyle="primary" defaultExpanded>
         <Panel header={title2} bsStyle="info" collapsible defaultExpanded >
-        <ListGroup fill>
-        <ListGroupItem href="#link1">Owner: Tomasz Dudek</ListGroupItem>
-        </ListGroup>
+          <ListGroup fill>
+            <ListGroupItem href="#link1">Owner: Tomasz Dudek</ListGroupItem>
+          </ListGroup>
         </Panel>
         <Panel header={title3} bsStyle="info" collapsible defaultExpanded>
-        <ListGroup fill>
-          <ListGroupItem href="#link1" className="flex flx-space-between">User1
-            <Button bsStyle="danger" bsSize="xsmall" className="hide" >Remove User</Button>
-            <Button bsStyle="success" bsSize="xsmall">Add new List</Button>
-          </ListGroupItem>
-          <ListGroupItem href="#link2">User2</ListGroupItem>
-          <ListGroupItem href="#link3">User3</ListGroupItem>
-          <ListGroupItem href="#link4">User4</ListGroupItem>
-        </ListGroup>
+          <ListGroup fill>
+            <ListGroupItem href="#link1" className="flex flx-space-between block">User1
+              <ButtonGroup bsSize="xsmall">
+              <Button bsStyle="danger"  className="block-btn" >Remove User</Button>
+              <Button bsStyle="success" className="block-btn">Add new List</Button>
+              </ButtonGroup>
+            </ListGroupItem>
+            <ListGroupItem href="#link2" className="flex flx-space-between block">User2
+              <ButtonGroup bsSize="xsmall">
+                <Button bsStyle="danger"  className="block-btn" >Remove User</Button>
+                <Button bsStyle="success" className="block-btn">Add new List</Button>
+              </ButtonGroup>
+            </ListGroupItem>
+            <ListGroupItem href="#link3" className="flex flx-space-between block">User3
+              <ButtonGroup bsSize="xsmall">
+                <Button bsStyle="danger"  className="block-btn" >Remove User</Button>
+                <Button bsStyle="success" className="block-btn">Add new List</Button>
+              </ButtonGroup>
+            </ListGroupItem>
+            <ListGroupItem href="#link4" className="flex flx-space-between block">User4
+              <ButtonGroup bsSize="xsmall">
+                <Button bsStyle="danger"  className="block-btn" >Remove User</Button>
+                <Button bsStyle="success" className="block-btn">Add new List</Button>
+              </ButtonGroup>
+            </ListGroupItem>
+          </ListGroup>
         </Panel>
       </Panel>
     </div>
   )
-
 };
 
 export default ProjectsDetails;

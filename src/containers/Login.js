@@ -82,7 +82,7 @@ class Login extends React.Component {
           <Form>
             <FormGroup validationState={this.getValidationState()}>
               <ControlLabel className="pdn10">Login</ControlLabel>
-              <div id="warning" className="warning pdn10-left"></div>
+              <div id="warning" className="warning pdn10-left"> </div>
               <InputGroup className="pdn10">
                 <InputGroup.Addon>@</InputGroup.Addon>
                 <FormControl
@@ -118,7 +118,7 @@ class Login extends React.Component {
           </Form>
           <div className="registration"><Link to="/registration">Sign me up</Link></div>
         </div>
-        <div id="temp"> Please use login: <b>tdkontakt@gmail.com</b> and password: <b>tom1234</b> temporarily
+        <div id="temp"> Please use login: <b>test1234@wp.pl</b> and password: <b>tom1234</b> temporarily
         </div>
       </section>
     );
