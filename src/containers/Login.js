@@ -1,15 +1,13 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import { connect } from 'react-redux';
-import { signin } from '../state/user/userActions';
-import { getUsers } from '../state/users/usersActions';
+import firebase from 'firebase'
 import {
   FormGroup,
   FormControl,
   InputGroup,
   Glyphicon,
   ControlLabel,
-  Checkbox,
   Button,
   Form
 } from 'react-bootstrap';
@@ -24,14 +22,11 @@ class Login extends React.Component {
     username: '',
     password: '',
     redirectToReferrer: false,
-
-
   };
 
   warning() {
     const { error } = this.props;
     const { isAuthenticated } = this.props;
-
     let warning = document.getElementById('warning');
 
     if (error && !isAuthenticated ) {
@@ -40,15 +35,13 @@ class Login extends React.Component {
     else {
       warning.innerHTML = '';
     }
-
   }
 
 
 
   handleLogin = () => {
-    this.props.signinHelper(this.state.username, this.state.password);
     this.warning();
-
+    firebase.auth().signInWithEmailAndPassword(this.state.username, this.state.password)
   };
 
   getValidationState() {
@@ -106,7 +99,6 @@ class Login extends React.Component {
               />
             </InputGroup>
             <div className="div__ctrl__login">
-              <div className="pdn10-left"><Checkbox readOnly>Keep me logged in</Checkbox></div>
               <div className="pdn10-right">
                 <Button
                   bsStyle="primary"
@@ -126,17 +118,12 @@ class Login extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-    console.log(state.user.loaded);
   return {
-    isAuthenticated: state.user.loaded,
-    data: state.user.data,
-    error: state.user.error
+    isAuthenticated: state.firebaseUser.data !== null,
+    data: state.firebaseUser.data
   };
 
 };
-const mapDispatchToProps = (dispatch) => ({
-  signinHelper: (username, password) => dispatch(signin(username, password)),
 
-});
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Login));
+export default withRouter(connect(mapStateToProps, null)(Login));

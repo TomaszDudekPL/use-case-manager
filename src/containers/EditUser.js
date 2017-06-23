@@ -1,11 +1,5 @@
 import React from 'react';
 import {Form, FormGroup, ControlLabel, InputGroup, FormControl, Glyphicon, Button} from 'react-bootstrap';
-import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
-import { removeUsers, updateUsers } from '../state/users/usersActions';
-import { signout } from '../state/user/userActions';
-
-
 
 
 
@@ -19,17 +13,16 @@ class EditUser extends React.Component {
   };
 
   handleRemoveUsers = () => {
-    this.props.removeUsers(this.state.userId);
-    // this.props.signout();
-  };
-  handleEditData = () => {
 
-    this.props.updateUsers(this.state.userId, {firstName: this.state.firstName, lastName: this.state.lastName, username: this.state.email});
+  };
+
+  handleEditData = () => {
 
   };
 
 
   render() {
+
     return (
       <section id="section__edit">
         <div className="div__panel">
@@ -97,7 +90,6 @@ class EditUser extends React.Component {
                 onClick={this.handleRemoveUsers}
                 type="button"
               >Remove User</Button>
-
             </div>
           </Form>
         </div>
@@ -107,20 +99,7 @@ class EditUser extends React.Component {
 
 }
 
-const mapStateToProps =  (state) => {
-console.log(state);
-  return {
-    userId: state.user.data.userId,
-    firstName: state.user.data.firstName,
-    lastName: state.user.data.lastName,
-    email: state.user.data.username
-  }
-};
-const mapDispatchToProps = (dispatch) => ({
 
-  removeUsers: (id) => dispatch(removeUsers(id)),
-  updateUsers: (id, data, options = {}, parameters) => dispatch(updateUsers(id, data, options = {}, parameters)),
-  signout: () => dispatch(signout())
-});
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(EditUser));
+export default EditUser;
+
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Grid, Table } from 'react-bootstrap';
 
+
 const headers = ['First Name', 'Last Name', 'E-mail'];
 let data = [
   ['Jan', 'Kowalski', 'example@gmail.com'],

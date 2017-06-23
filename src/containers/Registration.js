@@ -3,27 +3,43 @@ import React from 'react';
 import { Form, FormGroup, ControlLabel, InputGroup, FormControl, Glyphicon, Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { withRouter, Redirect } from 'react-router-dom';
-import { signup } from '../state/user/userActions';
-
+import firebase from 'firebase'
 
 
 class Registration extends React.Component {
 
   state = {
-    firstName: '',
-    lastName: '',
+    fullName: '',
     email: '',
-    password: '',
-    confirmPassword: ''
-
+    password: ''
   };
 
   handleSignUp =() => {
-    this.props.signupHelper(this.state.firstName, this.state.lastName,this.state.email, this.state.password, this.state.confirmPassword, {userId: 666});
+
+    const { email, password, fullName } = this.state;
+    firebase.auth().createUserWithEmailAndPassword(email, password).then(
+      user => {
+        user.updateProfile({
+          displayName: fullName
+        }).then(function() {
+          // Update successful.
+        }, function(error) {
+          // An error happened.
+        });
+      }
+    ).catch(function(error) {
+      // Handle Errors here.
+      let errorCode = error.code;
+      let errorMessage = error.message;
+      // ...
+    });
+
+
   };
 
 
   render() {
+    console.log(firebase.auth().currentUser);
     const { from } = this.props.location.state || { from: { pathname: '/' } };
     const { isAuthenticated, data } = this.props;
     if (isAuthenticated && data) {
@@ -45,19 +61,8 @@ class Registration extends React.Component {
               <InputGroup.Addon><Glyphicon glyph="user" /></InputGroup.Addon>
               <FormControl
                 id='firstName'
-                onChange={e => this.setState({ firstName: e.target.value })}
-                placeholder="First Name"
-                type="text"
-                value={this.state.value}
-              />
-              <FormControl.Feedback />
-            </InputGroup>
-            <InputGroup className="pdn10">
-              <InputGroup.Addon><Glyphicon glyph="pencil" /></InputGroup.Addon>
-              <FormControl
-                id='lastName'
-                onChange={e => this.setState({ lastName: e.target.value })}
-                placeholder="Last Name"
+                onChange={e => this.setState({ fullName: e.target.value })}
+                placeholder="Your Full Name"
                 type="text"
                 value={this.state.value}
               />
@@ -85,16 +90,6 @@ class Registration extends React.Component {
               value={this.state.value}
             />
           </InputGroup>
-          <InputGroup className="pdn10">
-            <InputGroup.Addon><Glyphicon glyph="star" /></InputGroup.Addon>
-            <FormControl
-              id='confirm_password'
-              onChange={e => this.setState({ confirmPassword: e.target.value })}
-              placeholder="Confirm password"
-              type="password"
-              value={this.state.value}
-            />
-          </InputGroup>
           <div className="div__ctrl__register">
             <div className="pdn10-right">
               <Button
@@ -114,8 +109,8 @@ class Registration extends React.Component {
 const mapStateToProps = (state) => {
 console.log(state);
   return {
-    isAuthenticated: state.user.loaded,
-    data: state.user.data
+    isAuthenticated: state.firebaseUser.data !== null,
+    data: state.firebaseUser.data
   }
 };
 

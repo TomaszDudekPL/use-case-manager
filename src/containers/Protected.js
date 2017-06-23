@@ -16,7 +16,7 @@ const Protected = () => {
         <Col xs={12} md={4}>
           <Button bsStyle="success" className="margin10-bottom" block>+ Add New Project</Button>
           <MyProjects />
-          <RegisteredUsers />
+          <RegisteredUsers label="Add to this project"/>
         </Col>
         <Col xs={12} md={8}>
           <ProjectDetails />

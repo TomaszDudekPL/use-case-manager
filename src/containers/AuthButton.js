@@ -3,28 +3,31 @@ import React from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import  { connect } from 'react-redux';
 import { Button } from 'react-bootstrap';
-import { signout } from '../state/user/userActions';
-
+import firebase from 'firebase'
 
 
 class AuthButton extends React.Component{
 
+  handleSignOutClick = () => {
+    const {history} = this.props;
+    firebase.auth().signOut();
+    history.push('/public');
+  };
+
 
   render() {
-    const { history, signoutHelper, isAuthenticated, data }= this.props;
+    const { isAuthenticated, data }= this.props;
     return (
      isAuthenticated ? (
        <p className="auth-paragraph">
-         You are logged in as <span className="info">{data.fullName || data.username}</span>
+         You are logged in as <span className="info">{data.displayName || data.email}</span>
          <Link to="/settings">Account Settings</Link>
          <Link to="/protected" className="red margin10-left">Use Case Manager</Link>
          <Button
            bsSize="xsmall"
            bsStyle="danger"
            className="auth-btn"
-           onClick={() => {
-             signoutHelper(() => history.push('/public'));
-           }}
+           onClick={this.handleSignOutClick}
          >Sign out
          </Button>
        </p>
@@ -51,8 +54,8 @@ class AuthButton extends React.Component{
 
 const mapStateToProps = (state) => {
   return {
-    isAuthenticated: state.user.loaded,
-    data: state.user.data
+    isAuthenticated: state.firebaseUser.data !== null,
+    data: state.firebaseUser.data
   };
 };
 

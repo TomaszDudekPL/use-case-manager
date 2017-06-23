@@ -24,7 +24,7 @@ const PrivateRoute = ({ component: Component,isAuthenticated, ...rest }) => (
 
 const mapStateToProps = (state) => {
 
-  return { isAuthenticated: state.user.loaded };
+  return { isAuthenticated: state.firebaseUser.data !== null};
 
 };
 

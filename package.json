@@ -15,8 +15,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@backand/redux-sdk": "^1.1.3",
-    "@backand/vanilla-sdk": "^1.2.3",
     "babel-core": "^6.24.1",
     "babel-loader": "^6.4.1",
     "babel-preset-es2015": "^6.24.1",
@@ -28,6 +26,7 @@
     "enzyme": "^2.8.1",
     "expect": "^1.20.2",
     "express": "^4.15.2",
+    "firebase": "^4.1.3",
     "mocha": "^3.2.0",
     "node-sass": "^4.5.2",
     "prop-types": "^15.5.8",
