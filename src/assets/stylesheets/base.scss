@@ -46,6 +46,10 @@
 .block:hover .block-btn {
   display: block;
 }
+.reset-pdn-top {
+  padding-top: 0;
+}
+
 
 
 
@@ -137,4 +141,9 @@
 }
 #protected{
   height: 100vh;
+}
+.label{
+  font-style: italic;
+  color: brown;
+  font-weight: normal;
 }

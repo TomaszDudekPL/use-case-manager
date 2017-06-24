@@ -36,12 +36,19 @@ class Login extends React.Component {
       warning.innerHTML = '';
     }
   }
+ // handleTest = (event) =>{
+ //   if(event.keyCode === 13){
+ //     alert('Adding....');
+ //   }
+ //
+ // };
 
 
 
   handleLogin = () => {
-    this.warning();
-    firebase.auth().signInWithEmailAndPassword(this.state.username, this.state.password)
+      this.warning();
+      firebase.auth().signInWithEmailAndPassword(this.state.username, this.state.password)
+
   };
 
   getValidationState() {
@@ -108,7 +115,7 @@ class Login extends React.Component {
                 >Submit</Button></div>
             </div>
           </Form>
-          <div className="registration"><Link to="/registration">Sign me up</Link></div>
+          <div className="registration"><Link to="/registration" className="red">Sign me up</Link></div>
         </div>
         <div id="temp"> Please use login: <b>test1234@wp.pl</b> and password: <b>tom1234</b> temporarily
         </div>

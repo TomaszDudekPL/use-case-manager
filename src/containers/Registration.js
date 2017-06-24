@@ -114,10 +114,6 @@ console.log(state);
   }
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  signupHelper: (firstName, lastName, email, password, confirmPassword, userId) => dispatch(signup(firstName, lastName, email, password, confirmPassword, userId))
 
-});
-
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Registration));
+export default withRouter(connect(mapStateToProps, null)(Registration));
 

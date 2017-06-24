@@ -59,10 +59,7 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  signoutHelper: () => dispatch(signout())
-});
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(AuthButton));
+export default withRouter(connect(mapStateToProps, null)(AuthButton));
 
 

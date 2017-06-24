@@ -1,28 +1,58 @@
 import React from 'react';
 import {Form, FormGroup, ControlLabel, InputGroup, FormControl, Glyphicon, Button} from 'react-bootstrap';
-
-
+import {connect} from 'react-redux'
+import { withRouter } from 'react-router-dom';
+import firebase from 'firebase'
 
 class EditUser extends React.Component {
 
   state = {
-    userId: this.props.userId,
-    firstName: this.props.firstName,
-    lastName: this.props.lastName,
+    fullName: this.props.fullName,
     email: this.props.email
   };
 
   handleRemoveUsers = () => {
+    let user = firebase.auth().currentUser;
+    if(user !== null){
+      user.delete().then(function() {
+        const {history} = this.props;
+        history.push('/public');
+        console.log('ten kod się wykonał');
+        firebase.auth().signOut();
+      }, function (error){
+        console.log('Nie udało się usunąć Usera!', error)
+      })
+    }
 
   };
 
-  handleEditData = () => {
 
+  handleEditData = () => {
+    let user = firebase.auth().currentUser;
+    if(user !== null){
+      user.updateProfile({
+        displayName: this.state.fullName
+      }).then( function() {
+          const {history} = this.props;
+          history.push('/protected');
+        console.log(history)
+      }, function(error){
+        console.log('Coś poszło nie tak!', error)
+        }
+      );
+      user.updateEmail(this.state.email).then(function(){
+          const {history} = this.props;
+          history.push('/protected');
+        console.log('Email zmieniony!', history);
+      }, function (error){
+        console.log('Email, nie zmieniony, błąd!', error)
+        }
+      )
+    }
   };
 
 
   render() {
-
     return (
       <section id="section__edit">
         <div className="div__panel">
@@ -33,33 +63,24 @@ class EditUser extends React.Component {
                 className="warning pdn10-left"
                 id="warning"
               />
-              <InputGroup className="pdn10">
+              <ControlLabel className="margin10-left label">Enter Your New Full Name</ControlLabel>
+              <InputGroup className="pdn10 reset-pdn-top">
                 <InputGroup.Addon><Glyphicon glyph="user"/></InputGroup.Addon>
                 <FormControl
                   id='firstName'
-                  onChange={e => this.setState({ firstName: e.target.value })}
-                  placeholder="First Name"
+                  onChange={e => this.setState({ fullName: e.target.value })}
+                  placeholder="New Full Name"
                   type="text"
-                  value={this.state.firstName}
+                  value={this.state.fullName}
                 />
                 <FormControl.Feedback />
               </InputGroup>
-              <InputGroup className="pdn10">
-                <InputGroup.Addon><Glyphicon glyph="pencil"/></InputGroup.Addon>
-                <FormControl
-                  id='lastName'
-                  onChange={e => this.setState({ lastName: e.target.value })}
-                  placeholder="Last Name"
-                  type="text"
-                  value={this.state.lastName}
-                />
-                <FormControl.Feedback />
-              </InputGroup>
-              <InputGroup className="pdn10">
+              <ControlLabel className="margin10-left label">Enter Your New E-mail</ControlLabel>
+              <InputGroup className="pdn10 reset-pdn-top">
                 <InputGroup.Addon>@</InputGroup.Addon>
                 <FormControl
                   id='email'
-                  placeholder="E-mail"
+                  placeholder="New E-mail"
                   type="email"
                   value={this.state.email}
                   onChange={e => this.setState({ email: e.target.value })}
@@ -67,23 +88,15 @@ class EditUser extends React.Component {
                 <FormControl.Feedback />
               </InputGroup>
             </FormGroup>
-            <InputGroup className="pdn10">
-              <InputGroup.Addon><Glyphicon glyph="star"/></InputGroup.Addon>
-              <FormControl
-                id='password'
-                placeholder="Password"
-                type="password"
-              />
-            </InputGroup>
             <div className="div__ctrl__register">
-                <Button
-                  bsStyle="warning"
-                  className="margin10-left"
-                  id="btn__edit"
-                  onClick={this.handleEditData}
-                  type="button"
-                >Change my data</Button>
-                <Button
+              <Button
+                bsStyle="warning"
+                className="margin10-left"
+                id="btn__edit"
+                onClick={this.handleEditData}
+                type="button"
+              >Change my data</Button>
+              <Button
                 bsStyle="danger"
                 className="margin10-right"
                 id="btn__edit"
@@ -95,11 +108,20 @@ class EditUser extends React.Component {
         </div>
       </section>
     )
+
   }
 
 }
+const mapStateToProps = (state)=> {
+  if (state.firebaseUser.data) {
+  return {
+    fullName: state.firebaseUser.data.displayName,
+    email: state.firebaseUser.data.email
+  };
+}
+};
 
 
-export default EditUser;
+export default withRouter(connect(mapStateToProps, null)(EditUser));
 
 
