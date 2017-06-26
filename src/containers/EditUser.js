@@ -1,25 +1,25 @@
 import React from 'react';
 import {Form, FormGroup, ControlLabel, InputGroup, FormControl, Glyphicon, Button} from 'react-bootstrap';
 import {connect} from 'react-redux'
-import { withRouter } from 'react-router-dom';
+import {withRouter} from 'react-router-dom';
 import firebase from 'firebase'
 
 class EditUser extends React.Component {
 
   state = {
     fullName: this.props.fullName,
-    email: this.props.email
+    email: this.props.email,
+    password: ''
   };
 
   handleRemoveUsers = () => {
     let user = firebase.auth().currentUser;
-    if(user !== null){
-      user.delete().then(function() {
+    if (user !== null) {
+      user.delete().then(() => {
         const {history} = this.props;
         history.push('/public');
-        console.log('ten kod się wykonał');
         firebase.auth().signOut();
-      }, function (error){
+      }, (error) => {
         console.log('Nie udało się usunąć Usera!', error)
       })
     }
@@ -29,30 +29,44 @@ class EditUser extends React.Component {
 
   handleEditData = () => {
     let user = firebase.auth().currentUser;
-    if(user !== null){
+
+    if (user !== null && this.state.password.length > 6) {
       user.updateProfile({
         displayName: this.state.fullName
-      }).then( function() {
+      }).then(() => {
           const {history} = this.props;
           history.push('/protected');
-        console.log(history)
-      }, function(error){
-        console.log('Coś poszło nie tak!', error)
+        }, (error) => {
+          console.log('FullName nie zmieniony! Bład:', error)
         }
       );
-      user.updateEmail(this.state.email).then(function(){
+      user.updateEmail(this.state.email).then(() => {
           const {history} = this.props;
           history.push('/protected');
-        console.log('Email zmieniony!', history);
-      }, function (error){
-        console.log('Email, nie zmieniony, błąd!', error)
+          console.log('Email zmieniony!', history);
+        }, (error) => {
+          console.log('Email, nie zmieniony, błąd!', error)
+        }
+      );
+
+      user.updatePassword(this.state.password).then(() => {
+        console.log('Hasło zmienione!');
+          const {history} = this.props;
+          history.push('/protected');
+        }, (error) => {
+          console.log('Hasło nie zmienione! Błąd:', error);
         }
       )
+
+    } else {
+      let warning = document.getElementById('pass-required');
+      warning.innerHTML = 'Password is required! (Min. 6 characters long)';
     }
   };
 
 
   render() {
+    console.log(this.state.password);
     return (
       <section id="section__edit">
         <div className="div__panel">
@@ -68,7 +82,7 @@ class EditUser extends React.Component {
                 <InputGroup.Addon><Glyphicon glyph="user"/></InputGroup.Addon>
                 <FormControl
                   id='firstName'
-                  onChange={e => this.setState({ fullName: e.target.value })}
+                  onChange={e => this.setState({fullName: e.target.value})}
                   placeholder="New Full Name"
                   type="text"
                   value={this.state.fullName}
@@ -83,26 +97,39 @@ class EditUser extends React.Component {
                   placeholder="New E-mail"
                   type="email"
                   value={this.state.email}
-                  onChange={e => this.setState({ email: e.target.value })}
+                  onChange={e => this.setState({email: e.target.value})}
+                />
+                <FormControl.Feedback />
+              </InputGroup>
+              <ControlLabel className="margin10-left label" id="pass-required">Enter Your Current or New Password
+                (required! Min. 6 char. long)</ControlLabel>
+              <InputGroup className="pdn10 reset-pdn-top">
+                <InputGroup.Addon>@</InputGroup.Addon>
+                <FormControl
+                  id='password'
+                  placeholder="Password"
+                  type="password"
+                  onChange={e => this.setState({password: e.target.value})}
                 />
                 <FormControl.Feedback />
               </InputGroup>
             </FormGroup>
             <div className="div__ctrl__register">
               <Button
-                bsStyle="warning"
+                bsStyle="danger"
                 className="margin10-left"
+                id="btn__edit"
+                onClick={this.handleRemoveUsers}
+                type="button"
+                >Remove User</Button>
+              <Button
+                bsStyle="warning"
+                className="margin10-right"
                 id="btn__edit"
                 onClick={this.handleEditData}
                 type="button"
               >Change my data</Button>
-              <Button
-                bsStyle="danger"
-                className="margin10-right"
-                id="btn__edit"
-                onClick={this.handleRemoveUsers}
-                type="button"
-              >Remove User</Button>
+
             </div>
           </Form>
         </div>
@@ -112,13 +139,13 @@ class EditUser extends React.Component {
   }
 
 }
-const mapStateToProps = (state)=> {
+const mapStateToProps = (state) => {
   if (state.firebaseUser.data) {
-  return {
-    fullName: state.firebaseUser.data.displayName,
-    email: state.firebaseUser.data.email
-  };
-}
+    return {
+      fullName: state.firebaseUser.data.displayName,
+      email: state.firebaseUser.data.email
+    };
+  }
 };
 
 

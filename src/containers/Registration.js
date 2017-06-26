@@ -15,19 +15,19 @@ class Registration extends React.Component {
   };
 
   handleSignUp =() => {
-
     const { email, password, fullName } = this.state;
     firebase.auth().createUserWithEmailAndPassword(email, password).then(
       user => {
         user.updateProfile({
           displayName: fullName
-        }).then(function() {
-          // Update successful.
-        }, function(error) {
-          // An error happened.
+        }).then(()=> {
+          const {history} = this.props;
+          history.push('/protected');
+        }, (error)=> {
+          console.log(error);
         });
       }
-    ).catch(function(error) {
+    ).catch((error)=> {
       // Handle Errors here.
       let errorCode = error.code;
       let errorMessage = error.message;

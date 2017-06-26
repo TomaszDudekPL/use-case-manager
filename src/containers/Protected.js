@@ -5,6 +5,8 @@ import ProjectDetails from '../components/ProjectDetails'
 import UseCaseList from '../components/UseCaseList'
 import RegisteredUsers from '../components/RegisteredUsers'
 import {Grid, Row, Col, Button} from 'react-bootstrap'
+import universalModal from "../components/ReuseableViewComponents";
+
 
 
 const Protected = () => {
@@ -22,6 +24,7 @@ const Protected = () => {
           <ProjectDetails />
           <UseCaseList />
         </Col>
+        <universalModal />
       </Row>
     </Grid>
   );
