@@ -5,7 +5,8 @@ import ProjectDetails from '../components/ProjectDetails'
 import UseCaseList from '../components/UseCaseList'
 import RegisteredUsers from '../components/RegisteredUsers'
 import {Grid, Row, Col, Button} from 'react-bootstrap'
-import universalModal from "../components/ReuseableViewComponents";
+import NewProjectModal from  './NewProjectModal';
+import AddNewListModal from "./AddNewListModal";
 
 
 
@@ -16,15 +17,15 @@ const Protected = () => {
     <Grid>
       <Row className="pos-relative top-150">
         <Col xs={12} md={4}>
-          <Button bsStyle="success" className="margin10-bottom" block>+ Add New Project</Button>
+          <NewProjectModal title='+Add New Project'/>
           <MyProjects />
           <RegisteredUsers label="Add to this project"/>
         </Col>
         <Col xs={12} md={8}>
           <ProjectDetails />
+          <AddNewListModal />
           <UseCaseList />
         </Col>
-        <universalModal />
       </Row>
     </Grid>
   );

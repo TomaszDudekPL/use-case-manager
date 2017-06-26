@@ -1,10 +1,8 @@
-import { createStore, combineReducers, compose, applyMiddleware } from 'redux';
+import {createStore, combineReducers, compose, applyMiddleware} from 'redux';
 import thunk from 'redux-thunk';
-import  counterReducer from './state/counterReducer';
-
+import  modalReducer from './state/modalReducer';
 import firebaseUser from './state/firebaseUser'
 import firebase from 'firebase'
-
 
 
 const firebaseConfig = {
@@ -18,10 +16,8 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 
 
-
 const reducers = combineReducers({
-  counterReducer: counterReducer,
-  // user,
+  modalReducer,
   firebaseUser
 
 });
