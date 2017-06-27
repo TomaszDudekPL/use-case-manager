@@ -19,6 +19,10 @@
 .flex{
   display: flex;
 }
+.flex-center{
+  justify-content: center;
+  align-items: center;
+}
 .flx-space-between{
   justify-content: space-between;
 }
@@ -34,16 +38,19 @@
 .top-150{
   top: 150px
 }
+.top-300{
+  top: 300px
+}
 .red{
   color: #f0402c
 }
 .block{
   height: 42px;
 }
-.block .block-btn{
+.block .block-btn, .toggleDone-off, .toggleNotDone-off{
   display: none;
 }
-.block:hover .block-btn {
+.block:hover .block-btn, .toggleDone-on, .toggleNotDone-on {
   display: block;
 }
 .reset-pdn-top {
@@ -142,7 +149,7 @@
 #protected{
   height: 100vh;
 }
-.label{
+.mylabel{
   font-style: italic;
   color: brown;
   font-weight: normal;

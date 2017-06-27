@@ -1,6 +1,5 @@
 import {createStore, combineReducers, compose, applyMiddleware} from 'redux';
 import thunk from 'redux-thunk';
-import  modalReducer from './state/modalReducer';
 import firebaseUser from './state/firebaseUser'
 import firebase from 'firebase'
 
@@ -17,9 +16,7 @@ firebase.initializeApp(firebaseConfig);
 
 
 const reducers = combineReducers({
-  modalReducer,
   firebaseUser
-
 });
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

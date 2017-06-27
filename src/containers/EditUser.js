@@ -77,7 +77,7 @@ class EditUser extends React.Component {
                 className="warning pdn10-left"
                 id="warning"
               />
-              <ControlLabel className="margin10-left label">Enter Your New Full Name</ControlLabel>
+              <ControlLabel className="margin10-left mylabel">Enter Your New Full Name</ControlLabel>
               <InputGroup className="pdn10 reset-pdn-top">
                 <InputGroup.Addon><Glyphicon glyph="user"/></InputGroup.Addon>
                 <FormControl
@@ -89,7 +89,7 @@ class EditUser extends React.Component {
                 />
                 <FormControl.Feedback />
               </InputGroup>
-              <ControlLabel className="margin10-left label">Enter Your New E-mail</ControlLabel>
+              <ControlLabel className="margin10-left mylabel">Enter Your New E-mail</ControlLabel>
               <InputGroup className="pdn10 reset-pdn-top">
                 <InputGroup.Addon>@</InputGroup.Addon>
                 <FormControl
@@ -101,7 +101,7 @@ class EditUser extends React.Component {
                 />
                 <FormControl.Feedback />
               </InputGroup>
-              <ControlLabel className="margin10-left label" id="pass-required">Enter Your Current or New Password
+              <ControlLabel className="margin10-left mylabel" id="pass-required">Enter Your Current or New Password
                 (required! Min. 6 char. long)</ControlLabel>
               <InputGroup className="pdn10 reset-pdn-top">
                 <InputGroup.Addon>@</InputGroup.Addon>
