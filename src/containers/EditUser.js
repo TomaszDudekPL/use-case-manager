@@ -1,5 +1,5 @@
 import React from 'react';
-import {Form, FormGroup, ControlLabel, InputGroup, FormControl, Glyphicon, Button} from 'react-bootstrap';
+import {Form, FormGroup, ControlLabel, InputGroup, FormControl, Glyphicon, Button, Modal} from 'react-bootstrap';
 import {connect} from 'react-redux'
 import {withRouter} from 'react-router-dom';
 import firebase from 'firebase'
@@ -9,8 +9,28 @@ class EditUser extends React.Component {
   state = {
     fullName: this.props.fullName,
     email: this.props.email,
-    password: ''
+    password: '',
+    showEditUserModal: false,
+    showRemoveUserModal: false
   };
+
+
+  close = () => {
+    this.setState({showEditUserModal: false});
+    this.setState({showRemoveUserModal: false});
+  };
+
+  openEditUserModal = () => {
+      this.setState({
+        showEditUserModal: true
+      })
+    };
+  openDeleteUserModal = () => {
+    this.setState({
+      showRemoveUserModal: true
+    })
+  };
+
 
   handleRemoveUsers = () => {
     let user = firebase.auth().currentUser;
@@ -20,10 +40,9 @@ class EditUser extends React.Component {
         history.push('/public');
         firebase.auth().signOut();
       }, (error) => {
-        console.log('Nie udało się usunąć Usera!', error)
+        console.log('Nie udało się usunąć Usera! Obiekt błędu:', error)
       })
     }
-
   };
 
 
@@ -34,15 +53,18 @@ class EditUser extends React.Component {
       user.updateProfile({
         displayName: this.state.fullName
       }).then(() => {
-          const {history} = this.props;
-          history.push('/protected');
+        console.log('FullName zmienione!');
+        this.setState({showEditUserModal: false});
+          // const {history} = this.props;
+          // history.push('/protected');
         }, (error) => {
-          console.log('FullName nie zmieniony! Bład:', error)
+          console.log('FullName nie zmieniony! Bład:', error);
+        this.setState({showEditUserModal: false});
         }
       );
       user.updateEmail(this.state.email).then(() => {
-          const {history} = this.props;
-          history.push('/protected');
+          // const {history} = this.props;
+          // history.push('/protected');
           console.log('Email zmieniony!', history);
         }, (error) => {
           console.log('Email, nie zmieniony, błąd!', error)
@@ -66,9 +88,37 @@ class EditUser extends React.Component {
 
 
   render() {
-    console.log(this.state.password);
+
     return (
       <section id="section__edit">
+
+        <div>
+          <Modal show={this.state.showEditUserModal} onHide={this.close} className="top-300">
+            <Modal.Body>
+              <div className="flex flex-center flx-direction-col">
+                <h3>Are you sure to change data of this User</h3>
+                <p id="pass-required" className="mylabel"> </p>
+              </div>
+            </Modal.Body>
+            <Modal.Footer>
+              <Button onClick={this.close} bsStyle="success" bsSize="small" >Cancel</Button>
+              <Button onClick={this.handleEditData} bsStyle="danger" bsSize="small" >Yes!</Button>
+            </Modal.Footer>
+          </Modal>
+        </div>
+
+        <div>
+          <Modal show={this.state.showRemoveUserModal} onHide={this.close} className="top-300">
+            <Modal.Body>
+              <div className="flex flex-center"><h3>Are you sure to remove this User?</h3></div>
+            </Modal.Body>
+            <Modal.Footer>
+              <Button onClick={this.close} bsStyle="success" bsSize="small" >Cancel</Button>
+              <Button onClick={this.handleRemoveUsers} bsStyle="danger" bsSize="small" >Yes!</Button>
+            </Modal.Footer>
+          </Modal>
+        </div>
+
         <div className="div__panel">
           <Form>
             <FormGroup >
@@ -101,7 +151,7 @@ class EditUser extends React.Component {
                 />
                 <FormControl.Feedback />
               </InputGroup>
-              <ControlLabel className="margin10-left mylabel" id="pass-required">Enter Your Current or New Password
+              <ControlLabel className="margin10-left mylabel" >Enter Your Current or New Password
                 (required! Min. 6 char. long)</ControlLabel>
               <InputGroup className="pdn10 reset-pdn-top">
                 <InputGroup.Addon>@</InputGroup.Addon>
@@ -119,14 +169,14 @@ class EditUser extends React.Component {
                 bsStyle="danger"
                 className="margin10-left"
                 id="btn__edit"
-                onClick={this.handleRemoveUsers}
+                onClick={this.openDeleteUserModal}
                 type="button"
                 >Remove User</Button>
               <Button
                 bsStyle="warning"
                 className="margin10-right"
                 id="btn__edit"
-                onClick={this.handleEditData}
+                onClick={this.openEditUserModal}
                 type="button"
               >Change my data</Button>
 

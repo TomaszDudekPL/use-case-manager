@@ -16,7 +16,7 @@ export default connect(
     componentDidMount() {
       firebase.auth().onAuthStateChanged((user) => {
         if (user) {
-          console.log('Logged in', this.props);
+          // console.log('Logged in. To obiekt propsów:', this.props);
           this.props.loginSuccess({
             displayName: user.displayName,
             email: user.email
@@ -31,7 +31,7 @@ export default connect(
           // });
 
         } else {
-          console.log('Not logged in')
+          console.log('Not logged in');
           this.props.logoutSuccess()
           // No user is signed in.
         }

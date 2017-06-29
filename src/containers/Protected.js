@@ -4,6 +4,7 @@ import MyProjects from './MyProjects'
 import ProjectDetails from './ProjectDetails'
 import RegisteredUsers from '../components/RegisteredUsers'
 import {Grid, Row, Col} from 'react-bootstrap'
+import CarouselExample from "../components/Carousel";
 
 
 
@@ -22,6 +23,7 @@ const Protected = () => {
           <ProjectDetails />
         </Col>
       </Row>
+      <CarouselExample />
     </Grid>
   );
 };

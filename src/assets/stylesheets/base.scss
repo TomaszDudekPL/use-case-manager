@@ -29,6 +29,9 @@
 .flx-end{
   justify-content: flex-end;
 }
+.flx-direction-col{
+  flex-direction: column;
+}
 .hide {
   display: none;
 }
@@ -75,7 +78,7 @@
 .div__ctrl__register {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: flex-end;
 }
 #btn__register{
   margin-bottom: 10px;
@@ -150,6 +153,7 @@
   height: 100vh;
 }
 .mylabel{
+  font-size: 12px;
   font-style: italic;
   color: brown;
   font-weight: normal;

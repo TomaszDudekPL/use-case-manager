@@ -26,24 +26,15 @@ class Login extends React.Component {
 
   warning() {
     const { error } = this.props;
-    const { isAuthenticated } = this.props;
     let warning = document.getElementById('warning');
 
-    if (error && !isAuthenticated ) {
+    if ( error ) {
       warning.innerHTML = 'Username or Password incorrect';
     }
     else {
       warning.innerHTML = '';
     }
   }
- // handleTest = (event) =>{
- //   if(event.keyCode === 13){
- //     alert('Adding....');
- //   }
- //
- // };
-
-
 
   handleLogin = () => {
       this.warning();
@@ -64,9 +55,9 @@ class Login extends React.Component {
   render() {
 
     const { from } = this.props.location.state || { from: { pathname: '/' } };
-    const { isAuthenticated } = this.props;
+    const { isAuthenticated, error } = this.props;
 
-    if(this.props.error) this.warning();
+    if( this.props.data && error) this.warning();
 
     if (this.props.data && isAuthenticated) {
       return (
@@ -117,20 +108,22 @@ class Login extends React.Component {
           </Form>
           <div className="registration"><Link to="/registration" className="red">Sign me up</Link></div>
         </div>
-        <div id="temp"> Please use login: <b>test1234@wp.pl</b> and password: <b>tom1234</b> temporarily
-        </div>
       </section>
     );
   }
 }
 
 const mapStateToProps = (state) => {
-  return {
-    isAuthenticated: state.firebaseUser.data !== null,
-    data: state.firebaseUser.data
-  };
+
+    return {
+      isAuthenticated: state.firebaseUser.data !== null,
+      error: state.firebaseUser.data === null,
+      data: state.firebaseUser.data
+    };
 
 };
+
+
 
 
 export default withRouter(connect(mapStateToProps, null)(Login));

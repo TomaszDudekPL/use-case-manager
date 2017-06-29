@@ -107,7 +107,7 @@ class Registration extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-console.log(state);
+
   return {
     isAuthenticated: state.firebaseUser.data !== null,
     data: state.firebaseUser.data
