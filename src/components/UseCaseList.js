@@ -88,6 +88,7 @@ class UseCaseList extends React.Component {
                 <FormGroup className="pdn10">
                 <FieldGroup
                   id="formControlsFile"
+                  multiple
                   type="file"
                   label="File you want to add"
                   help="Use image for this case"

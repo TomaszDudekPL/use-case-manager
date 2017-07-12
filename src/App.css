@@ -154,3 +154,8 @@
   color: brown;
   font-weight: normal;
 }
+#div_slider{
+  width: 200px;
+  height: 150px;
+  background-color: blue;
+}
