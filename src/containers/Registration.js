@@ -29,7 +29,9 @@ class Registration extends React.Component {
       }
     ).catch((error)=> {
       // Handle Errors here.
+        // eslint-disable-next-line
       let errorCode = error.code;
+        // eslint-disable-next-line
       let errorMessage = error.message;
       // ...
     });

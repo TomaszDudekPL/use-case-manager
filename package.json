@@ -1,19 +1,7 @@
 {
-  "name": "react-node-starter",
-  "version": "1.0.0",
-  "description": "an example for deploying a React + NodeJS app to Heroku",
-  "main": "server.js",
-  "scripts": {
-    "build": "webpack --config webpack.prod.config.js",
-    "dev": "webpack-dev-server --hot --inline",
-    "lint": "eslint src/**",
-    "lint:watch": "esw -w src/**",
-    "start": "npm run build && NODE_ENV=production node server.js",
-    "test": "mocha --compilers js:babel-core/register ./test/**/*.spec.js --require ignore-styles",
-    "postinstall": "npm rebuild node-sass"
-  },
-  "author": "",
-  "license": "ISC",
+  "name": "use-case-manager-test",
+  "version": "0.1.0",
+  "private": true,
   "dependencies": {
     "babel-core": "^6.24.1",
     "babel-loader": "^6.4.1",
@@ -22,7 +10,7 @@
     "babel-preset-stage-0": "^6.24.1",
     "bootstrap": "^3.3.7",
     "classnames": "^2.2.5",
-    "css-loader": "^0.28.0",
+    "css-loader": "^0.28.4",
     "enzyme": "^2.8.1",
     "expect": "^1.20.2",
     "express": "^4.15.2",
@@ -30,17 +18,15 @@
     "mocha": "^3.2.0",
     "node-sass": "^4.5.2",
     "prop-types": "^15.5.8",
-    "react": "^15.5.4",
     "react-bootstrap": "^0.31.0",
-    "react-dom": "^15.5.4",
-    "react-redux": "^5.0.4",
-    "react-router": "^4.1.1",
+    "react-redux": "^5.0.5",
     "react-router-bootstrap": "^0.24.2",
-    "redux": "^3.6.0",
+    "react-scripts": "^1.0.10",
+    "redux": "^3.7.1",
     "redux-thunk": "^2.2.0",
     "sass-loader": "^6.0.3",
     "style-loader": "^0.16.1",
-    "webpack": "^2.3.3"
+    "webpack": "^2.7.0"
   },
   "devDependencies": {
     "babel-eslint": "^7.2.2",
@@ -51,16 +37,22 @@
     "eslint-plugin-jsx-a11y": "^4.0.0",
     "eslint-plugin-react": "^6.10.3",
     "eslint-watch": "^3.1.0",
-    "history": "^4.6.1",
+    "history": "^4.6.3",
     "ignore-styles": "^5.0.1",
-    "react": "^15.5.4",
+    "react": "^15.6.1",
     "react-addons-test-utils": "^15.5.1",
-    "react-dom": "^15.5.4",
+    "react-dom": "^15.6.1",
     "react-router": "^4.1.1",
     "react-router-dom": "^4.1.1",
     "react-test-renderer": "^15.5.4",
     "webpack-dev-middleware": "^1.10.1",
     "webpack-dev-server": "^2.4.2",
     "webpack-hot-middleware": "^2.18.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
   }
 }

@@ -65,7 +65,7 @@ class EditUser extends React.Component {
       user.updateEmail(this.state.email).then(() => {
           // const {history} = this.props;
           // history.push('/protected');
-          console.log('Email zmieniony!', history);
+          // console.log('Email zmieniony!', history);
         }, (error) => {
           console.log('Email, nie zmieniony, błąd!', error)
         }

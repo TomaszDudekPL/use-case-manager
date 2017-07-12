@@ -1,5 +1,5 @@
 import React from 'react'
-import {Panel, ButtonToolbar, Button, ListGroup, ListGroupItem, Popover, Tooltip, OverlayTrigger, Modal } from 'react-bootstrap'
+import {Panel, ButtonToolbar, Button, ListGroup, ListGroupItem } from 'react-bootstrap'
 
 
 

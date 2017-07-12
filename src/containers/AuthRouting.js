@@ -20,7 +20,7 @@ const AuthRouting = () => (
       >
         <Navbar.Header>
           <Navbar.Brand>
-            <a href="#">Use Case Manager</a>
+            {/*<a href="#">Use Case Manager</a>*/}
           </Navbar.Brand>
           <Navbar.Toggle />
         </Navbar.Header>
