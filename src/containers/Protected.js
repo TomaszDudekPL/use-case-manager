@@ -4,7 +4,7 @@ import MyProjects from './MyProjects'
 import ProjectDetails from './ProjectDetails'
 import RegisteredUsers from '../components/RegisteredUsers'
 import {Grid, Row, Col} from 'react-bootstrap'
-import SimpleSlider from '../components/Slider'
+
 
 
 
@@ -22,7 +22,6 @@ const Protected = () => {
         <Col xs={12} md={8}>
           <ProjectDetails />
         </Col>
-        <SimpleSlider />
       </Row>
     </Grid>
   );

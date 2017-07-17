@@ -9,6 +9,7 @@ import Protected from './Protected';
 import Admin from './Admin';
 import Registration from './Registration';
 import EditUser from './EditUser';
+import ProtectedUseCaseView from './ProtectedUseCaseView'
 
 const AuthRouting = () => (
   <NewRouter>
@@ -71,6 +72,10 @@ const AuthRouting = () => (
       <PrivateRoute
         component={Protected}
         path="/protected"
+      />
+      <PrivateRoute
+          component={ProtectedUseCaseView}
+          path="/usecase"
       />
     </div>
   </NewRouter>
