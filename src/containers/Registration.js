@@ -21,7 +21,7 @@ class Registration extends React.Component {
                 user.updateProfile({
                     displayName: fullName
                 }).then(() => {
-                    firebase.database().ref('/users/' + user.uid).set({
+                    firebase.database().ref('Users/' + user.uid).set({
                         username: fullName,
                         email: email
                     });
