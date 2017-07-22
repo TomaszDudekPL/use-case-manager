@@ -17,7 +17,7 @@ const Protected = (props) => {
                     {/*<Route path={`${props.match.url}/:userId`} component={MyProjects}/>*/}
                     <MyProjects/>
                     {/*<Route path={`${props.match.url}/:userId`} component={RegisteredUsers}  label="Add to this project"/>*/}
-                    <RegisteredUsers label="Add to this project"/>
+                    <RegisteredUsers label="Add contributor to this project"/>
                 </Col>
                 <Col xs={12} md={8}>
                     <ProjectDetails />

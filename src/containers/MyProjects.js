@@ -114,7 +114,6 @@ class MyProjects extends React.Component {
                                                  onChange={e => this.setState({projectTitle: e.target.value})}/>
                                 </FormGroup>
                             </form>
-                            <h5 className="mylabel">Project Name: xxxxxxxx</h5>
                         </Modal.Body>
                         <Modal.Footer>
                             <Button onClick={this.handleSubmit} bsStyle="success"
