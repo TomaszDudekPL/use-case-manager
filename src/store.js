@@ -1,30 +1,32 @@
 import {createStore, combineReducers, compose, applyMiddleware} from 'redux';
 import thunk from 'redux-thunk';
 import firebaseUser from './state/firebaseUser'
+import userProjectReducer from './state/userProjectReducer.js'
 import firebase from 'firebase'
 
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBjKNFEKmOHUBLLLQTzXkF2PBj4QHgVpNM",
-  authDomain: "use-case-manager.firebaseapp.com",
-  databaseURL: "https://use-case-manager.firebaseio.com",
-  projectId: "use-case-manager",
-  storageBucket: "use-case-manager.appspot.com",
-  messagingSenderId: "407999254779"
+    apiKey: "AIzaSyBjKNFEKmOHUBLLLQTzXkF2PBj4QHgVpNM",
+    authDomain: "use-case-manager.firebaseapp.com",
+    databaseURL: "https://use-case-manager.firebaseio.com",
+    projectId: "use-case-manager",
+    storageBucket: "use-case-manager.appspot.com",
+    messagingSenderId: "407999254779"
 };
 firebase.initializeApp(firebaseConfig);
 
 
 const reducers = combineReducers({
-  firebaseUser
+    firebaseUser,
+    userProjectReducer
 });
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 let store = createStore(
-  reducers,
-  composeEnhancers(
-    applyMiddleware(thunk)
-  )
+    reducers,
+    composeEnhancers(
+        applyMiddleware(thunk)
+    )
 );
 
 

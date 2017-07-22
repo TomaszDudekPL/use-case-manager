@@ -25,28 +25,6 @@ class ProjectDetails extends React.Component {
     };
 
 
-    // componentDidUpdate() {
-    //     firebase.database().ref('Projects/' + this.props.match.params.projectId).on(
-    //         'value',
-    //         snapshot => {
-    //             const projectObject = snapshot.val();
-    //             this.setState({
-    //                 projectTitle: projectObject.title,
-    //                 projectOwner: projectObject.owner
-    //             })
-    //             // const userKeys = Object.keys(usersObject);
-    //             // const users = userKeys.map(
-    //             //     key => ({
-    //             //         ...usersObject[key],
-    //             //         key: key
-    //             //     })
-    //             // );
-    //             //
-    //             // this.setState({users: users})
-    //         }
-    //     )
-    // }
-
 
     close = () => {
         this.setState({showModal: false});
@@ -81,15 +59,15 @@ class ProjectDetails extends React.Component {
                     </Modal>
                 </div>
 
-                <Panel header={title1} bsStyle="primary" defaultExpanded>
+                <Panel header={this.props.project ? this.props.project.title: '' || 'Title of Project' } bsStyle="primary" defaultExpanded>
                     <Panel header={title2} bsStyle="success" collapsible defaultExpanded>
                         <ListGroup fill>
-                            <ListGroupItem href="#link1">owner: temporary</ListGroupItem>
+                            <ListGroupItem href="#link1">{this.props.project ? this.props.project.owner: '' || 'Owner'}</ListGroupItem>
                         </ListGroup>
                     </Panel>
                     <Panel header={title3} bsStyle="success" collapsible defaultExpanded>
                         <ListGroup fill>
-                            <ListGroupItem href="#link1" className="flex flx-space-between block">User1
+                            <ListGroupItem href="#link1" className="flex flx-space-between block">{this.props.project && this.props.project.users ? this.props.project.users.map(user=>user.username): null || 'add contributors if you need...'}
                                 <ButtonGroup bsSize="xsmall">
                                     <Button bsStyle="danger" className="block-btn">Remove User</Button>
                                     <Button bsStyle="success" className="block-btn" onClick={this.open}>+Add new
@@ -107,13 +85,16 @@ class ProjectDetails extends React.Component {
     }
 }
 const mapStateToProps = (state) => {
-            // console.log('To jest state:',state);
-    return {
-        projects: state !== null,
 
-    };
+    if(state.userProjectReducer.data) {
 
+        return {
+            project: state.userProjectReducer.data.project
+
+        }
+    }
 };
+
 
 export default connect(mapStateToProps, null)(ProjectDetails);
 

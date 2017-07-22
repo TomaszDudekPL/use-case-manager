@@ -45,17 +45,7 @@ class MyProjects extends React.Component {
 
     };
 
-    // componentDidMount() {
-    //     firebase.database().ref('Users').on(
-    //         'value',
-    //         snapshot => this.setState({
-    //             projects: firebaseValToArray(snapshot.val())
-    //
-    //         })
-    //
-    //     )
-    //
-    // }
+
     componentDidMount() {
         const user = firebase.auth().currentUser;
         firebase.database().ref('Users/' + user.uid + '/Projects/').on('value',
@@ -67,17 +57,14 @@ class MyProjects extends React.Component {
     }
 
     handleUserProjects = (e) => {
-        let titleOfClickedProject = e.target;
-        console.log(titleOfClickedProject);
-        let text = titleOfClickedProject.firstChild;
-        console.log(text);
-        let proj = this.state.projects.filter( project => project.title === text ? project : null);
-        console.log('to jest proj:',proj);
-        // if(this.state.projects) {
-        //     this.props.userProjects({
-        //         project: proj
-        //     });
-        // }
+        let clickedElement = e.target;
+        let textNodeOfClickedElement = clickedElement.innerHTML;
+        let selectedProject = this.state.projects.filter( project => project.title === textNodeOfClickedElement ? project: null);
+        if(this.state.projects !== null) {
+            this.props.userProjects({
+                project: selectedProject[0]
+            });
+        }
 
     };
 
@@ -104,7 +91,7 @@ class MyProjects extends React.Component {
     };
 
     render() {
-        console.log(this.state.projects);
+        // console.log(this.state.projects);
         return (
             <div id="MyProjects">
                 <Button
@@ -141,7 +128,7 @@ class MyProjects extends React.Component {
                         {
                             this.state.projects ? this.state.projects.map(project => (
                                 <LinkContainer to={'/protected/' + project.key} key={project.key}>
-                                    <ListGroupItem onClick={this.handleUserProjects} id={project.key}>{project.title}</ListGroupItem>
+                                    <ListGroupItem onClick={this.handleUserProjects}>{project.title}</ListGroupItem>
                                 </LinkContainer>
                             )) : null
 
@@ -153,17 +140,13 @@ class MyProjects extends React.Component {
     }
 }
 
-const mapStateToProps = (state) => {
-    // console.log('to jest state ze stora:',state);
-    return state;
-};
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        userProjects: data => dispatch({type: 'firebaseUser/USERPROJECTS', data})
+        userProjects: data => dispatch({type: 'USERPROJECT', data})
     }
 };
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(MyProjects))
+export default withRouter(connect(null, mapDispatchToProps)(MyProjects))
 
 

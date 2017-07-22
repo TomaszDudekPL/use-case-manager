@@ -45,7 +45,7 @@ class Registration extends React.Component {
 
 
     render() {
-        console.log(firebase.auth().currentUser);
+
         const {from} = this.props.location.state || {from: {pathname: '/'}};
         const {isAuthenticated, data} = this.props;
         if (isAuthenticated && data) {
